@@ -1,14 +1,18 @@
+const isVisited = localStorage.getItem('hasJoinVisited');
+console.log(isVisited);
 function redirectUserToPage(page) {
   const finalPage =
     page == 'signup'
-      ? 'https://my.realdevsquad.com/signup?state=get-started'
-      : 'https://realdevsquad.com';
+      ? 'http://localhost:3443/signup?state=get-started'
+      : page == 'join.html'
+      ? 'http://localhost:5500/join.html'
+      : 'http://localhost:5500/';
 
   window.location.href = finalPage;
 }
 
 function showSignupFormIfIncomplete() {
-  fetch('https://api.realdevsquad.com/users/self', {
+  fetch('http://localhost:3000/users/self', {
     headers: { 'content-type': 'application/json' },
     credentials: 'include',
   })
@@ -16,6 +20,8 @@ function showSignupFormIfIncomplete() {
     .then((data) => {
       if (data.incompleteUserDetails) {
         redirectUserToPage('signup');
+      } else if (isVisited == null) {
+        redirectUserToPage('join.html');
       } else {
         redirectUserToPage('home');
       }

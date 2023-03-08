@@ -15,7 +15,9 @@ const flowState = {
   reasonForRdsPage: 3,
   previewPage: 4,
   completedPage: 5,
+  hasJoinVisited: false,
 };
+window.localStorage.setItem('hasJoinVisited', true);
 
 const startBtn = document.getElementById('start');
 
@@ -123,7 +125,7 @@ function fetchSavedDetails() {
       alert(
         'We are facing an internal server error! Please try again after some time',
       );
-      location.href = 'https://realdevsquad.com';
+      location.href = 'http://localhost:5500/';
     });
 }
 
@@ -350,6 +352,7 @@ submit.addEventListener('click', async () => {
     .catch((err) => {
       alert(`Error in saving user data ${err}`);
     });
+  window.localStorage.setItem('hasJoinVisited', false);
 });
 
 copyBtn.addEventListener('click', () => {

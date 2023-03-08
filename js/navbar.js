@@ -7,7 +7,7 @@ hamburger.addEventListener('click', () => {
 });
 
 const signout = () => {
-  fetch('https://api.realdevsquad.com/auth/signout', {
+  fetch('http://localhost:3000/auth/signout', {
     method: 'GET',
     credentials: 'include',
   }).then(() => {
@@ -21,7 +21,7 @@ document.getElementById('signout-option').addEventListener('click', () => {
 
 document.querySelectorAll('myprofile-option').forEach((option) => {
   option.addEventListener('click', () => {
-    location.href = 'https://my.realdevsquad.com';
+    location.href = 'http://localhost:3443/';
   });
 });
 

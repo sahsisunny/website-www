@@ -27,7 +27,7 @@ const setUserGreeting = (username, firstName, userProfilePicture) => {
 };
 
 const fetchData = () => {
-  return fetch('https://api.realdevsquad.com/users/self', {
+  return fetch('http://localhost:3000/users/self', {
     headers: { 'content-type': 'application/json' },
     credentials: 'include',
   })
@@ -37,7 +37,7 @@ const fetchData = () => {
         throw new Error(res.error);
       }
       if (res.incompleteUserDetails) {
-        return window.location.replace('https://my.realdevsquad.com/signup');
+        return window.location.replace('http://localhost:3443/signup');
       }
       setUserGreeting(res.username, res.first_name, res.picture?.url); // BAD
     });

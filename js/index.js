@@ -1,12 +1,8 @@
 const selectRandom = (memberImgArr, n) => {
   const result = new Set();
   const len = memberImgArr.length;
-  if (n > len)
-    throw new RangeError('selectRandom: more elements taken than available');
-  while (result.size !== n) {
-    const x = Math.floor(Math.random() * len);
-    result.add(memberImgArr[x]);
-  }
+  if (n > len) result.add(memberImgArr[Math.floor(Math.random() * len)]);
+
   return result;
 };
 
@@ -39,7 +35,7 @@ const getMemberURL = (rdsId) => `https://members.realdevsquad.com/${rdsId}`;
 
 const getMemberImgs = () => {
   const memberImgArray = [];
-  fetch('https://api.realdevsquad.com/members', {
+  fetch('http://localhost:3000/members', {
     cache: 'default',
     headers: {
       'content-type': 'application/json',
