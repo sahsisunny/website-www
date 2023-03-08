@@ -1,5 +1,6 @@
 const isVisited = localStorage.getItem('hasJoinVisited');
 console.log(isVisited);
+console.log(typeof isVisited);
 function redirectUserToPage(page) {
   const finalPage =
     page == 'signup'
@@ -11,6 +12,14 @@ function redirectUserToPage(page) {
   window.location.href = finalPage;
 }
 
+function redirectToJoinIfNotVisited() {
+  if (isVisited == 'true' || isVisited == null) {
+    redirectUserToPage('join.html');
+  } else {
+    redirectUserToPage('home');
+  }
+}
+
 function showSignupFormIfIncomplete() {
   fetch('http://localhost:3000/users/self', {
     headers: { 'content-type': 'application/json' },
@@ -20,10 +29,8 @@ function showSignupFormIfIncomplete() {
     .then((data) => {
       if (data.incompleteUserDetails) {
         redirectUserToPage('signup');
-      } else if (isVisited == null) {
-        redirectUserToPage('join.html');
       } else {
-        redirectUserToPage('home');
+        redirectToJoinIfNotVisited();
       }
     })
     .catch((e) => {
