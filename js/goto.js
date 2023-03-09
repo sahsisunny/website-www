@@ -1,22 +1,24 @@
-const isVisited = localStorage.getItem('hasJoinVisited');
-console.log(isVisited);
-console.log(typeof isVisited);
+import { SIGNUP, JOIN, HOME } from './constants.js';
+
+const hasJoinVisited = localStorage.getItem('hasJoinVisited');
 function redirectUserToPage(page) {
   const finalPage =
-    page == 'signup'
+    page == SIGNUP
       ? 'http://localhost:3443/signup?state=get-started'
-      : page == 'join.html'
+      : page == JOIN
       ? 'http://localhost:5500/join.html'
       : 'http://localhost:5500/';
 
   window.location.href = finalPage;
 }
 
-function redirectToJoinIfNotVisited() {
-  if (isVisited == 'true' || isVisited == null) {
-    redirectUserToPage('join.html');
+function redirectionHandler(data) {
+  if (data.incompleteUserDetails) {
+    redirectUserToPage(SIGNUP);
+  } else if (hasJoinVisited == 'true' || hasJoinVisited == null) {
+    redirectUserToPage(JOIN);
   } else {
-    redirectUserToPage('home');
+    redirectUserToPage(HOME);
   }
 }
 
@@ -27,14 +29,10 @@ function showSignupFormIfIncomplete() {
   })
     .then((res) => res.json())
     .then((data) => {
-      if (data.incompleteUserDetails) {
-        redirectUserToPage('signup');
-      } else {
-        redirectToJoinIfNotVisited();
-      }
+      redirectionHandler(data);
     })
     .catch((e) => {
-      redirectUserToPage('home');
+      redirectUserToPage(HOME);
     });
 }
 
