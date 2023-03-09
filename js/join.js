@@ -6,6 +6,7 @@ import {
   SELF_URL,
 } from './constants.js';
 
+window.localStorage.setItem('hasJoinVisited', true);
 fetchSavedDetails();
 
 const flowState = {
@@ -16,7 +17,6 @@ const flowState = {
   previewPage: 4,
   completedPage: 5,
 };
-window.localStorage.setItem('hasJoinVisited', true);
 
 const startBtn = document.getElementById('start');
 
