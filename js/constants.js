@@ -261,8 +261,5 @@ export const JOIN_POST_URL = `${BASE_URL}/users/self/intro`;
 export const SELF_URL = `${BASE_URL}/users/self`;
 export const GITHUB_OAUTH =
   'https://github.com/login/oauth/authorize?client_id=7a92acab838a01096b9b';
-export const SIGNUP = 'signup';
-export const HOME = 'home';
-export const JOIN = 'join';
 export const SIGNUP_URL = 'http://localhost:3443/signup?state=get-started';
 export const HOME_URL = 'http://localhost:5500';
