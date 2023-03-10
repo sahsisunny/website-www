@@ -1,14 +1,14 @@
-import { SIGNUP, JOIN, HOME } from './constants.js';
+import { SIGNUP, JOIN, HOME, SIGNUP_URL, HOME_URL } from './constants.js';
 
 const hasJoinVisited = localStorage.getItem('hasJoinVisited');
+
 function redirectUserToPage(page) {
   const finalPage =
     page == SIGNUP
-      ? 'http://localhost:3443/signup?state=get-started'
+      ? SIGNUP_URL
       : page == JOIN
-      ? 'http://localhost:5500/join.html'
-      : 'http://localhost:5500/';
-
+      ? `${HOME_URL}/join.html`
+      : HOME_URL;
   window.location.href = finalPage;
 }
 
